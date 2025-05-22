@@ -1,0 +1,423 @@
+/* @theme paper-theme */
+
+/* General Components */
+:root {
+      /* Color Palette (Inspired by METI PDF) */
+      --main-bg-color: #ffffff;
+      --main-text-color: #333333; /* Slightly lighter than pure black */
+      --heading-text-color: #002060; /* Dark blue for H1, H2 */
+      --h1-border-color: #0070C0; /* Blue for H1 bottom border */
+      --accent-color-blue-dark: #002060;
+      --accent-color-blue-medium: #0070C0;
+      --accent-color-blue-light: #5B9BD5;
+      --accent-color-green: #00B050;
+      --accent-color-orange: #ED7D31;
+      --header-footer-text-color: #404040;
+      --header-footer-bg-color: #f8f8f8; /* Light gray for header/footer bg if needed */
+      --header-border-color: #BFBFBF;
+      --link-color: var(--accent-color-blue-medium);
+      --table-header-bg: var(--accent-color-blue-dark);
+      --table-header-text: #ffffff;
+      --table-row-stripe-bg: #f2f2f2;
+      --code-bg-color: #f5f5f5;
+      --code-text-color: #333333;
+      --code-inline-bg-color: #e7e7e7;
+      --blockquote-border-color: var(--accent-color-blue-medium);
+      --blockquote-bg-color: #f9f9f9;
+    
+      /* Typography */
+      --font-family-sans-serif: "游ゴシック Medium", YuGothic, YuGothicM, "Hiragino Kaku Gothic ProN", Meiryo, "メイリオ", "Segoe UI", "Helvetica Neue", Arial, sans-serif;
+      --font-family-monospace: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, monospace;
+    
+      /* Font Sizes (relative to Marp's auto-scaled base) */
+      --base-font-size-section: 20px; /* Base for text in section, Marp scales this. Adjust as needed. */
+      --h1-font-size: 2.0em;  /* Approx 40px if base is 20px */
+      --h2-font-size: 1.5em;  /* Approx 30px */
+      --h3-font-size: 1.25em; /* Approx 25px */
+      --h4-font-size: 1.1em;  /* Approx 22px */
+      --h5-font-size: 1.0em;
+      --h6-font-size: 0.9em;
+      --code-font-size: 0.85em;
+      --header-footer-font-size: 0.6em; /* Approx 12px if base is 20px. METI PDF has small header/footer text. */
+      --small-font-size: 0.85em;
+    
+      /* Spacing & Layout */
+      --slide-padding-vertical: 30px;
+      --slide-padding-horizontal: 50px;
+      --header-height: 40px; /* Approximate height for header */
+      --footer-height: 30px; /* Approximate height for footer */
+      --content-spacing: 0.5em;
+      --heading-margin-top: 0.8em;
+      --heading-margin-bottom: 0.4em;
+}
+
+    /* --- Slide Base --- */
+    section {
+      font-family: var(--font-family-sans-serif);
+      font-size: var(--base-font-size-section);
+      color: var(--main-text-color);
+      background-color: var(--main-bg-color);
+      padding: var(--header-height) var(--slide-padding-horizontal) var(--footer-height) var(--slide-padding-horizontal);
+      line-height: 1.6;
+      box-sizing: border-box;
+      text-align: left; /* Default text alignment */
+    }
+    
+    /* --- Header & Footer --- */
+    header, footer {
+      font-family: var(--font-family-sans-serif);
+      font-size: var(--header-footer-font-size);
+      color: var(--header-footer-text-color);
+      position: absolute;
+      left: var(--slide-padding-horizontal);
+      right: var(--slide-padding-horizontal);
+      box-sizing: border-box;
+      display: flex;
+      align-items: center;
+      z-index: 100;
+    }
+    
+    header {
+      top: 0;
+      height: var(--header-height);
+      padding-top: 5px; /* Adjust as needed */
+      border-bottom: 1px solid var(--header-border-color);
+      justify-content: space-between;
+    }
+    header > div:first-child { text-align: left; }
+    header > div:last-child { text-align: right; }
+    
+    footer {
+      bottom: 0;
+      height: var(--footer-height);
+      padding-bottom: 5px; /* Adjust as needed */
+      /* border-top: 1px solid var(--header-border-color); */ /* Optional top border for footer */
+      justify-content: center; /* Default for page number */
+    }
+    /* For more complex footers like METI PDF (left, center, right text) */
+    footer.complex {
+      justify-content: space-between;
+    }
+    footer > .footer-left { flex: 1; text-align: left; }
+    footer > .footer-center { flex: 1; text-align: center; } /* For page number */
+    footer > .footer-right { flex: 1; text-align: right; }
+    /* Usage in Markdown:
+    ---
+    paginate: true
+    footer: |
+      <div class="footer-left">左寄せ情報</div>
+      <div class="footer-center"></div> <div class="footer-right">右寄せ情報</div>
+    _footer: |
+      <div class="footer-left">左寄せ情報</div>
+      <div class="footer-center"> </div>
+      <div class="footer-right">右寄せ情報</div>
+    ---
+    Note: Marp's default pagination might conflict. Simpler to use default center pagination or just text.
+    For page numbers in complex footer, you might need to manually insert {{page}} if Marp doesn't auto-fill the center div.
+    The example _footer shows how you might structure it for a local directive.
+    */
+    
+    
+    /* --- Headings (H1-H6) --- */
+    h1, h2, h3, h4, h5, h6 {
+      font-family: var(--font-family-sans-serif);
+      color: var(--heading-text-color);
+      font-weight: 600; /* Slightly less bold than 700 */
+      margin: var(--heading-margin-top) 0 var(--heading-margin-bottom) 0;
+      line-height: 1.3;
+    }
+    
+    h1 {
+      font-size: var(--h1-font-size);
+      font-weight: 700; /* H1 can be bolder */
+      margin-top: 0;
+      padding-bottom: 0.2em;
+      border-bottom: 3px solid var(--h1-border-color);
+      color: var(--heading-text-color);
+    }
+    
+    h2 {
+      font-size: var(--h2-font-size);
+      color: var(--heading-text-color);
+      /* Optional: border like METI section titles */
+      /* border-left: 4px solid var(--accent-color-blue-medium); */
+      /* padding-left: 0.4em; */
+    }
+    
+    h3 {
+      font-size: var(--h3-font-size);
+      color: var(--accent-color-blue-medium); /* Use medium blue for H3 */
+      font-weight: 600;
+    }
+    
+    h4 {
+      font-size: var(--h4-font-size);
+      color: var(--main-text-color);
+      font-weight: 600;
+    }
+    
+    h5 { font-size: var(--h5-font-size); color: var(--main-text-color); font-weight: normal; }
+    h6 { font-size: var(--h6-font-size); color: var(--main-text-color); font-weight: normal; }
+    
+    /* --- Paragraphs & Text Elements --- */
+    p {
+      margin: var(--content-spacing) 0;
+    }
+    
+    a { color: var(--link-color); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+    
+    strong, b { font-weight: 700; }
+    em, i { font-style: italic; }
+    small { font-size: var(--small-font-size); color: #555555; }
+    mark { background-color: #FFFACD; padding: 0.1em 0.2em; color: var(--main-text-color); }
+    
+    
+    /* --- Lists (Unordered & Ordered) --- */
+    ul, ol {
+      margin: var(--content-spacing) 0;
+      padding-left: 1.5em; /* Slightly less indentation */
+    }
+    
+    ul li { list-style-type: '●'; margin-bottom: 0.3em; padding-left: 0.5em;} /* Filled circle, like in some METI docs */
+    ul ul li { list-style-type: '○'; padding-left: 0.5em; }
+    ul ul ul li { list-style-type: '■'; padding-left: 0.5em; }
+    
+    ol { counter-reset: list-item; }
+    ol li { display: block; margin-bottom: 0.3em; }
+    ol li:before {
+      content: counters(list-item, ".") " "; /* 1. 1.1. 1.1.1. style */
+      counter-increment: list-item;
+      font-weight: normal;
+      margin-right: 0.5em;
+      color: var(--main-text-color);
+    }
+    ol ol li:before { content: counters(list-item, ".") " "; } /* Consistent numbering for nested OL */
+    
+    
+    /* --- Code Blocks & Inline Code --- */
+    pre {
+      background-color: var(--code-bg-color);
+      border: 1px solid #dddddd;
+      border-radius: 4px;
+      padding: 0.8em;
+      overflow-x: auto;
+      font-family: var(--font-family-monospace);
+      font-size: var(--code-font-size);
+      line-height: 1.45;
+      color: var(--code-text-color);
+      margin: 0.8em 0;
+    }
+    
+    code { /* Inline code */
+      font-family: var(--font-family-monospace);
+      font-size: var(--code-font-size);
+      background-color: var(--code-inline-bg-color);
+      color: #d63384; /* Common magenta for inline code */
+      padding: 0.15em 0.3em;
+      border-radius: 3px;
+      word-wrap: break-word;
+    }
+    
+    pre > code { /* Reset styles for code element within a pre block */
+      background-color: transparent;
+      color: inherit;
+      font-size: 1em;
+      padding: 0;
+      border-radius: 0;
+      border: none;
+    }
+    
+    /* --- Tables --- */
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 1em 0;
+      font-size: 0.85em; /* Slightly smaller text in tables */
+      border: 1px solid #cccccc;
+    }
+    
+    th, td {
+      border: 1px solid #cccccc;
+      padding: 0.5em 0.7em;
+      text-align: left;
+    }
+    
+    thead th {
+      background-color: var(--table-header-bg);
+      color: var(--table-header-text);
+      font-weight: 600;
+      border-color: var(--table-header-bg);
+      text-align: center; /* METI tables often have centered headers */
+    }
+    
+    tbody tr:nth-child(even) {
+      background-color: var(--table-row-stripe-bg);
+    }
+    tbody td {
+      vertical-align: top; /* Better for cells with more content */
+    }
+    
+    
+    /* --- Blockquotes --- */
+    blockquote {
+      margin: 1em 0 1em 1.5em; /* Indent from left */
+      padding: 0.8em 1.2em;
+      border-left: 4px solid var(--blockquote-border-color);
+      background-color: var(--blockquote-bg-color);
+      color: #444444;
+      font-style: italic;
+    }
+    blockquote p { margin: 0; }
+    blockquote footer { /* For citation */
+      font-style: normal;
+      font-size: 0.8em;
+      text-align: right;
+      color: #777;
+      margin-top: 0.5em;
+      padding: 0;
+      border: 0;
+      height: auto;
+      background: none;
+    }
+    
+    
+    /* --- Images --- */
+    section img {
+      max-width: 100%;
+      height: auto;
+      display: block;
+      margin: 1em auto; /* Center images by default */
+      border-radius: 2px; /* Subtle rounding */
+      /* box-shadow: 0 1px 3px rgba(0,0,0,0.1); */ /* Optional subtle shadow */
+    }
+    /* For figures with captions (requires HTML structure in Markdown) */
+    figure {
+      margin: 1em 0;
+      text-align: center; /* Center the figure content */
+    }
+    figure img {
+      margin-bottom: 0.3em;
+    }
+    figure figcaption {
+      font-size: 0.8em;
+      color: #555555;
+      text-align: center; /* Or left, as in METI docs */
+    }
+    /* Example in Markdown:
+    <figure>
+      <img src="image.png" alt="図1：概要">
+      <figcaption>図1：システムの概要図（出典：経済産業省）</figcaption>
+    </figure>
+    */
+    
+    /* --- Horizontal Rule --- */
+    hr {
+      border: 0;
+      border-top: 1px solid #cccccc;
+      margin: 1.5em 0;
+    }
+    
+    /* --- Custom Slide Classes (use with ) --- */
+    
+    /* Title Slide: For the first slide of the presentation */
+    section.titlepage {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      padding-top: 0;
+      padding-bottom: 0;
+    }
+    section.titlepage h1 {
+      font-size: 2.5em; /* Larger font for the main title */
+      color: var(--accent-color-blue-dark);
+      border-bottom: none;
+      margin-bottom: 0.3em;
+    }
+    section.titlepage h2 { /* For subtitle on the title slide */
+      font-size: 1.4em;
+      color: var(--main-text-color);
+      font-weight: normal;
+      margin-top: 0;
+      margin-bottom: 1.5em;
+    }
+    section.titlepage p { /* For author, date, etc. on the title slide */
+      font-size: 0.9em;
+      color: var(--header-footer-text-color);
+    }
+    /* Example usage in Markdown:
+    ---
+    # 論文タイトル / 発表タイトル
+    ## サブタイトルや会議名など
+    発表者名
+    202X年X月X日
+    ---
+    */
+    
+    /* Section Title / Chapter Slide: For slides indicating a new section */
+    section.section_title {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      background-color: var(--accent-color-blue-dark);
+      color: #ffffff;
+    }
+    section.section_title h1, section.section_title h2 {
+      color: #ffffff;
+      border-bottom: none;
+    }
+    section.section_title h1 {
+      font-size: 2.2em;
+    }
+    section.section_title h2 {
+      font-size: 1.3em;
+      font-weight: normal;
+    }
+    
+    /* Invert Color Scheme: Dark background slide for contrast */
+    section.inverted {
+      background-color: var(--accent-color-blue-dark);
+      color: #f0f0f0;
+    }
+    section.inverted h1, section.inverted h2, section.inverted h3,
+    section.inverted h4, section.inverted h5, section.inverted h6 {
+      color: #ffffff;
+    }
+    section.inverted h1 { border-bottom-color: var(--accent-color-blue-light); }
+    section.inverted a { color: var(--accent-color-blue-light); }
+    section.inverted code { background-color: #001030; color: #f0f0f0; }
+    section.inverted pre { background-color: #001030; border-color: var(--accent-color-blue-medium); color: #f0f0f0; }
+    section.inverted table thead th { background-color: var(--accent-color-blue-medium); color: #ffffff; border-color: var(--accent-color-blue-medium); }
+    section.inverted tbody tr:nth-child(even) { background-color: #002850; }
+    section.inverted blockquote { border-left-color: var(--accent-color-blue-light); background-color: #002850; color: #dddddd; }
+    section.inverted hr { border-top-color: var(--accent-color-blue-medium); }
+    
+    
+    /* Two Columns Layout Helper (requires HTML in Markdown) */
+    .columns {
+      display: flex;
+      gap: 20px; /* Space between columns */
+      margin-top: 1em;
+      margin-bottom: 1em;
+    }
+    .columns > .column {
+      flex: 1; /* Equal width columns */
+    }
+    .columns > .column.is-two-thirds { flex: 2; }
+    .columns > .column.is-one-third { flex: 1; }
+    /* Example in Markdown:
+    <div class="columns">
+      <div class="column">
+        ## Column 1
+        Content...
+      </div>
+      <div class="column">
+        ## Column 2
+        Content...
+      </div>
+    </div>
+    */
