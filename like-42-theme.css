@@ -1,0 +1,108 @@
+/* @theme like-42-theme */
+
+@import 'gaia';
+/* https://fonts.google.com/selection?hl=ja&query=noto+sans */
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@100..900&display=swap');
+
+
+/* General Components */
+:root {
+  --color-main-text: #ffffff;
+  --color-background: #18181d;
+  --color-foreground: #231f20;
+  --color-heightlight: #00BABC;
+  --color-dimmed: #888888;
+  --main-color: #00BABC;
+}
+
+/* --- Slide Base --- */
+section.titlepage {
+  background-size: 20%;
+  background-repeat: no-repeat;
+  background-position: top 10% left 7%;
+  background-color: var(--color-background);
+  padding: 70px;
+}
+
+section {
+  font-family: "Noto Sans JP", "游ゴシック体", YuGothic, "游ゴシック Medium", "Yu Gothic Medium", "ヒラギノ角ゴ ProN W3", "Hiragino Kaku Gothic ProN", Meiryo, sans-serif;
+  font-weight: 500;
+  line-height: 1.6;
+  color: var(--color-main-text);
+  font-size: 20px;
+
+  height: 720px;
+  line-height: 1.35;
+  letter-spacing: 1.25px;
+  padding-top: 30px;
+  padding-right: 60px;
+  padding-left: 60px;
+  padding-bottom: 30px;
+  width: 1280px;
+  word-wrap: break-word;
+}
+
+section::after {
+  font-size: 10px;
+  center: attr(data-marpit-pagination) " / " attr(data-marpit-pagination-total);
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  color: var(--main-color);
+}
+
+h1 {
+  font-size: 2.0em;
+  text-align: left;
+  border-bottom: var(--main-color);
+  padding-bottom: 0.3em;
+  margin-bottom: 0.8em;
+}
+
+h2 {
+  font-size: 1.8em;
+  border-bottom: var(--main-color);
+  border-left: 5px solid var(--main-color);
+  padding-left: 10px;
+  margin-top: 1.2em;
+}
+
+h3 {
+  font-size: 1.4em;
+  color: var(--main-color);
+}
+
+h4 {
+  font-size: 1.2em;
+}
+
+h4 {
+  font-size: 1.1em;
+}
+
+h4 {
+  font-size: 1.0em;
+}
+
+ul li {
+  list-style-type: '■';
+  margin-bottom: 0.3em;
+  padding-left: 0.5em;
+}
+
+ul ul li{
+  list-style-type: '〇';
+  margin-bottom: 0.3em;
+  padding-left: 0.5em;
+}
+
+ul ul ul li{
+  list-style-type: '●';
+  margin-bottom: 0.3em;
+  padding-left: 0.5em;
+}
