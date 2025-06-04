@@ -15,7 +15,6 @@
   --main-color: #00BABC;
 }
 
-/* --- Slide Base --- */
 section.titlepage {
   background-size: 20%;
   background-repeat: no-repeat;
@@ -139,7 +138,12 @@ table {
   }
 }
 
-code,
+code {
+  background-color: #29292e;
+  color:#00BABC;
+}
+
 code * {
   font-family: "Monaco", "Courier New", monospace !important;
+  color: #ffffff;
 }
