@@ -44,7 +44,7 @@ section {
 
 section::after {
   font-size: 10px;
-  center: attr(data-marpit-pagination) " / " attr(data-marpit-pagination-total);
+  content: attr(data-marpit-pagination) " / " attr(data-marpit-pagination-total);
 }
 
 h1,
@@ -105,4 +105,8 @@ ul ul ul li{
   list-style-type: '●';
   margin-bottom: 0.3em;
   padding-left: 0.5em;
+}
+
+code, code * {
+  font-family: "Monaco", "Courier New", monospace !important;
 }
